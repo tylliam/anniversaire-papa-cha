@@ -72,8 +72,58 @@
       height: 350px;
     }
 
-    .form {
-      height: 900px;
+    .rsvp-form {
+      margin-top: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .form-row label {
+      font-weight: bold;
+      color: #7a4a35;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e2cfc3;
+      border-radius: 12px;
+      font: inherit;
+      background: #fffdfb;
+    }
+
+    .form-row textarea {
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background: #b85c38;
+      color: white;
+      border: none;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
     .gallery-grid {
@@ -140,8 +190,8 @@
         padding: 16px;
       }
 
-      .form {
-        height: 980px;
+      .form-grid {
+        grid-template-columns: 1fr;
       }
 
       .gallery-item img {
@@ -189,9 +239,49 @@
 
   <div class="card">
     <h2>✅ Confirmer votre présence</h2>
-    <iframe class="form"
-      src="https://docs.google.com/forms/d/e/1FAIpQLSfhD4GC9y5bp3QaoLXC0PlHCPvk69macjIZI1ZjDlUYwX_sIw/viewform?embedded=true">
-    </iframe>
+    <p>Remplissez ce formulaire pour confirmer votre présence. Après envoi, votre réponse sera transmise directement à l’organisateur.</p>
+
+    <form action="https://formspree.io/f/TON_IDENTIFIANT" method="POST" class="rsvp-form">
+      <div class="form-row">
+        <label for="nom">Nom et prénom</label>
+        <input type="text" id="nom" name="nom" required />
+      </div>
+
+      <div class="form-row">
+        <label for="presence">Serez-vous présent(e) ?</label>
+        <select id="presence" name="presence" required>
+          <option value="">Choisir</option>
+          <option value="Oui">Oui</option>
+          <option value="Non">Non</option>
+        </select>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="adultes">Nombre d'adultes</label>
+          <input type="number" id="adultes" name="adultes" min="0" value="1" />
+        </div>
+
+        <div class="form-row">
+          <label for="enfants">Nombre d'enfants</label>
+          <input type="number" id="enfants" name="enfants" min="0" value="0" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="remarques">Remarques</label>
+        <textarea id="remarques" name="remarques" rows="4" placeholder="Allergies, contraintes, message..."></textarea>
+      </div>
+
+      <input type="hidden" name="_subject" value="Nouvelle réponse - Anniversaire Papa Cha" />
+      <input type="hidden" name="_language" value="fr" />
+
+      <button type="submit" class="submit-btn">Envoyer ma réponse</button>
+    </form>
+
+    <p style="font-size: 14px; opacity: 0.75; margin-top: 12px;">
+      Remplace <strong>TON_IDENTIFIANT</strong> par l’identifiant fourni par Formspree pour activer l’envoi des réponses.
+    </p>
   </div>
 
   <p class="footer">
